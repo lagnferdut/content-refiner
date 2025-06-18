@@ -1,5 +1,7 @@
+
 {
-  "name": "Content Refiner",
-  "description": "Elegancka aplikacja internetowa do udoskonalania treści tekstowych przy użyciu AI. Obsługuje wiele języków, przesyłanie plików oraz różnorodne opcje udoskonalania z podświetlaniem zmian i funkcją eksportu.",
-  "requestFramePermissions": []
+  "name": "Kreator Treści",
+  "description": "Elegancka aplikacja internetowa do ulepszania treści tekstowych przy użyciu AI. Obsługuje wiele języków, przesyłanie plików oraz różne opcje ulepszania z podświetlaniem zmian i funkcją eksportu.",
+  "requestFramePermissions": [],
+  "prompt": ""
 }

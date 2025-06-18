@@ -9,9 +9,8 @@ interface ExportControlsProps {
   filename?: string;
 }
 
-const ExportControls: React.FC<ExportControlsProps> = ({ textToExport, filename = "udoskonalona_tresc" }) => {
+const ExportControls: React.FC<ExportControlsProps> = ({ textToExport, filename = "ulepszona_tresc" }) => {
   const [copied, setCopied] = useState(false);
-  const [copyError, setCopyError] = useState<string | null>(null);
 
   if (!textToExport) return null;
 
@@ -19,22 +18,17 @@ const ExportControls: React.FC<ExportControlsProps> = ({ textToExport, filename 
     navigator.clipboard.writeText(textToExport)
       .then(() => {
         setCopied(true);
-        setCopyError(null);
         setTimeout(() => setCopied(false), 2000);
       })
-      .catch(err => {
-        console.error('Nie udało się skopiować tekstu: ', err);
-        setCopyError('Nie udało się skopiować. Spróbuj ponownie.');
-        setTimeout(() => setCopyError(null), 3000);
-      });
+      .catch(err => console.error('Nie udało się skopiować tekstu: ', err));
   };
 
   return (
     <div className="mt-6 p-4 bg-slate-800/50 rounded-lg shadow-lg border border-slate-700">
-      <h3 className="text-lg font-medium text-sky-300 mb-3">Opcje Eksportu</h3>
+      <h3 className="text-lg font-medium text-sky-300 mb-3">Opcje eksportu</h3>
       <div className="flex flex-wrap gap-3">
         <Button onClick={handleCopy} variant="secondary" size="sm" leftIcon={<CopyIcon className="w-4 h-4" />}>
-          {copied ? 'Skopiowano!' : 'Kopiuj do Schowka'}
+          {copied ? 'Skopiowano!' : 'Kopiuj do schowka'}
         </Button>
         <Button onClick={() => exportTextAsFile(textToExport, filename, 'txt')} variant="secondary" size="sm" leftIcon={<DownloadIcon className="w-4 h-4" />}>
           Eksportuj jako .txt
@@ -46,7 +40,6 @@ const ExportControls: React.FC<ExportControlsProps> = ({ textToExport, filename 
           Eksportuj jako .docx
         </Button>
       </div>
-      {copyError && <p className="text-sm text-red-400 mt-2" role="alert">{copyError}</p>}
     </div>
   );
 };

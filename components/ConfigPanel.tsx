@@ -49,7 +49,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ initialParams, onRefine, isLo
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (!inputText.trim()) {
-      alert("Proszę wprowadzić tekst lub przesłać plik do udoskonalenia.");
+      alert("Proszę wprowadzić tekst lub wgrać plik do ulepszenia.");
       return;
     }
     onRefine(inputText, params, suggestions);
@@ -60,14 +60,14 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ initialParams, onRefine, isLo
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <SelectDropdown
           id="language"
-          label="Język Tekstu"
+          label="Język tekstu"
           value={params.language}
           options={LANGUAGE_OPTIONS}
           onChange={(val) => handleParamChange('language', val)}
         />
         <SelectDropdown
           id="purpose"
-          label="Cel / Potrzeba"
+          label="Cel / Przeznaczenie"
           value={params.purpose}
           options={PURPOSE_OPTIONS}
           onChange={(val) => handleParamChange('purpose', val)}
@@ -81,7 +81,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ initialParams, onRefine, isLo
         />
         <SelectDropdown
           id="length"
-          label="Pożądana Długość"
+          label="Oczekiwana długość"
           value={params.length}
           options={LENGTH_OPTIONS}
           onChange={(val) => handleParamChange('length', val)}
@@ -90,19 +90,18 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ initialParams, onRefine, isLo
 
       <div>
         <label htmlFor="inputText" className="block text-sm font-medium text-sky-300 mb-1">
-          Tekst Wejściowy
+          Tekst wejściowy
         </label>
         <textarea
           id="inputText"
           rows={8}
           className="block w-full bg-slate-700 border border-slate-600 text-slate-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 sm:text-sm p-3 placeholder-slate-400 transition-colors duration-150"
-          placeholder="Wklej tutaj swój tekst lub prześlij plik..."
+          placeholder="Wklej tekst tutaj lub wgraj plik..."
           value={inputText}
           onChange={(e) => {
             setInputText(e.target.value);
             if (fileName) setFileName(null); // Clear file name if text is manually changed
           }}
-          aria-label="Tekst Wejściowy"
         />
       </div>
 
@@ -110,36 +109,32 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ initialParams, onRefine, isLo
         <label
           htmlFor="file-upload"
           className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-sky-500 text-sm font-medium rounded-md text-sky-300 bg-slate-700 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 transition-colors duration-150 w-full sm:w-auto"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') (document.getElementById('file-upload') as HTMLInputElement)?.click(); }}
         >
           <UploadIcon className="w-5 h-5 mr-2" />
-          Prześlij Plik (.txt, .docx, .pdf)
+          Wgraj plik (.txt, .docx, .pdf)
         </label>
-        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} accept=".txt,.docx,.pdf,.md" aria-hidden="true" />
-        {fileName && <span className="text-sm text-slate-400 truncate max-w-xs" aria-live="polite">Wybrano: {fileName}</span>}
+        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} accept=".txt,.docx,.pdf,.md" />
+        {fileName && <span className="text-sm text-slate-400 truncate max-w-xs">Wybrano: {fileName}</span>}
       </div>
-      {fileError && <p className="text-sm text-red-400" role="alert">{fileError}</p>}
+      {fileError && <p className="text-sm text-red-400">{fileError}</p>}
 
 
       <div>
         <label htmlFor="suggestions" className="block text-sm font-medium text-sky-300 mb-1">
-          Opcjonalne Sugestie dla AI
+          Opcjonalne sugestie dla AI
         </label>
         <input
           type="text"
           id="suggestions"
           className="block w-full bg-slate-700 border border-slate-600 text-slate-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 sm:text-sm p-2.5 placeholder-slate-400 transition-colors duration-150"
-          placeholder="np. 'Podkreśl korzyści dla nowych użytkowników', 'Niech brzmi bardziej pilnie'"
+          placeholder="np. 'Podkreśl korzyści dla nowych użytkowników', 'Nadaj bardziej pilny ton'"
           value={suggestions}
           onChange={(e) => setSuggestions(e.target.value)}
-          aria-label="Opcjonalne Sugestie dla AI"
         />
       </div>
 
       <Button type="submit" variant="primary" size="lg" className="w-full" isLoading={isLoading} disabled={isLoading || !inputText.trim()}>
-        {isLoading ? 'Udoskonalanie...' : 'Udoskonal Treść'}
+        {isLoading ? 'Ulepszanie...' : 'Ulepsz treść'}
       </Button>
     </form>
   );

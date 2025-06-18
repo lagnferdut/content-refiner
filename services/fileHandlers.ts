@@ -27,7 +27,7 @@ export const extractTextFromFile = async (file: File): Promise<string> => {
         } else if (file.type === "text/plain" || file.name.endsWith(".txt")) {
           resolve(new TextDecoder().decode(arrayBuffer));
         } else {
-          reject(new Error("Nieobsługiwany typ pliku. Proszę przesłać pliki .docx, .pdf lub .txt."));
+          reject(new Error("Nieobsługiwany typ pliku. Proszę wgrać pliki .docx, .pdf lub .txt."));
         }
       } catch (error) {
         console.error("Błąd przetwarzania pliku:", error);
@@ -55,8 +55,7 @@ export const exportTextAsFile = (content: string, filename: string, type: 'txt' 
         properties: {},
         children: [
           new window.docx.Paragraph({
-            // children: content.split('\n').map(line => new window.docx.TextRun(line)) // Simple new lines
-             children: content.split('\n').flatMap(line => [new window.docx.TextRun(line), new window.docx.TextRun({ break: 1 })]).slice(0, -1) // Preserve new lines correctly
+            children: content.split('\n').map(line => new window.docx.TextRun(line))
           }),
         ],
       }],
@@ -65,7 +64,8 @@ export const exportTextAsFile = (content: string, filename: string, type: 'txt' 
     window.docx.Packer.toBlob(doc).then((blob: Blob) => {
       window.saveAs(blob, `${filename}.docx`);
     }).catch((err: Error) => {
-        console.error("Błąd podczas tworzenia pliku DOCX:", err);
+        console.error("Błąd tworzenia pliku DOCX:", err);
+        // Fallback to TXT if DOCX creation fails
         alert("Nie udało się wygenerować pliku DOCX. Eksportowanie jako TXT.");
         exportTextAsFile(content, filename, 'txt');
     });

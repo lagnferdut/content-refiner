@@ -6,14 +6,14 @@ export enum Language {
 }
 
 export enum Purpose {
-  EMAIL_TO_CLIENT = "Email do Klienta",
-  SOCIAL_MEDIA_POST = "Post na Media Społecznościowe",
-  BLOG_ARTICLE = "Artykuł Blogowy",
-  FORMAL_REPORT = "Raport Formalny",
-  CASUAL_MESSAGE = "Wiadomość Nieformalna",
-  MARKETING_COPY = "Tekst Marketingowy",
-  TECHNICAL_DOCUMENTATION = "Dokumentacja Techniczna",
-  CREATIVE_STORY = "Opowiadanie Kreatywne",
+  EMAIL_TO_CLIENT = "Email do klienta",
+  SOCIAL_MEDIA_POST = "Post na media społecznościowe",
+  BLOG_ARTICLE = "Artykuł na bloga",
+  FORMAL_REPORT = "Raport formalny",
+  CASUAL_MESSAGE = "Wiadomość nieformalna",
+  MARKETING_COPY = "Tekst marketingowy",
+  TECHNICAL_DOCUMENTATION = "Dokumentacja techniczna",
+  CREATIVE_STORY = "Opowiadanie kreatywne",
 }
 
 export enum Tone {
@@ -23,15 +23,15 @@ export enum Tone {
   HUMOROUS = "Humorystyczny",
   PERSUASIVE = "Perswazyjny",
   EMPATHETIC = "Empatyczny",
-  CONFIDENT = "Pewny Siebie",
+  CONFIDENT = "Pewny siebie",
   NEUTRAL = "Neutralny",
 }
 
 export enum DesiredLength {
-  CONCISE = "Zwięzły (podsumuj)",
-  DETAILED = "Szczegółowy (rozwiń)",
-  ORIGINAL_LENGTH = "Zbliżona do oryginału",
-  VERY_SHORT = "Bardzo krótki (np. tweet)",
+  CONCISE = "Zwięzła (podsumuj)",
+  DETAILED = "Szczegółowa (rozwiń)",
+  ORIGINAL_LENGTH = "Podobna do oryginału",
+  VERY_SHORT = "Bardzo krótka (np. tweet)",
   MEDIUM = "Średnia długość (kilka akapitów)",
 }
 

@@ -40,10 +40,10 @@ const App: React.FC = () => {
     setAppState(prev => ({ ...prev, isLoading: true, error: null, originalText: text, refinedText: '' }));
     try {
       const result = await generateRefinedText(text, params, suggestions);
-      setAppState(prev => ({ ...prev, refinedText: result, isLoading: false, showDiff: false })); // Reset showDiff on new result
+      setAppState(prev => ({ ...prev, refinedText: result, isLoading: false }));
     } catch (err) {
-      console.error("Błąd udoskonalania:", err);
-      const errorMessage = err instanceof Error ? err.message : "Wystąpił nieznany błąd podczas udoskonalania.";
+      console.error("Błąd ulepszania:", err);
+      const errorMessage = err instanceof Error ? err.message : "Wystąpił nieznany błąd podczas ulepszania.";
       setAppState(prev => ({ ...prev, error: errorMessage, isLoading: false }));
     }
   }, []);
@@ -63,14 +63,14 @@ const App: React.FC = () => {
         />
 
         {appState.isLoading && (
-          <div className="mt-8 flex flex-col items-center justify-center p-6 bg-slate-800 rounded-xl shadow-xl border border-slate-700" role="status" aria-live="polite">
+          <div className="mt-8 flex flex-col items-center justify-center p-6 bg-slate-800 rounded-xl shadow-xl border border-slate-700">
             <LoaderIcon className="w-12 h-12 text-sky-400 mb-4" />
-            <p className="text-lg text-sky-300">Trwa udoskonalanie Twojej treści, proszę czekać...</p>
+            <p className="text-lg text-sky-300">Ulepszanie Twojej treści, proszę czekać...</p>
           </div>
         )}
 
         {appState.error && (
-          <div className="mt-8 p-4 bg-red-700/30 text-red-300 border border-red-500 rounded-md shadow-lg" role="alert">
+          <div className="mt-8 p-4 bg-red-700/30 text-red-300 border border-red-500 rounded-md shadow-lg">
             <h3 className="font-semibold text-lg mb-1">Błąd</h3>
             <p>{appState.error}</p>
           </div>
@@ -85,13 +85,13 @@ const App: React.FC = () => {
               onToggleDiff={toggleDiff}
             />
             {appState.refinedText && (
-               <ExportControls textToExport={appState.refinedText} filename={appState.originalText.substring(0,20).replace(/\s+/g, '_') || "udoskonalona_tresc"} />
+               <ExportControls textToExport={appState.refinedText} filename="ulepszona_tresc" />
             )}
           </>
         )}
       </main>
       <footer className="text-center py-6 text-slate-500 text-sm">
-        Autor - Radek Skowron
+        Oparte na Gemini API & React. Zaprojektowano z myślą o elegancji i wydajności.
       </footer>
     </div>
   );

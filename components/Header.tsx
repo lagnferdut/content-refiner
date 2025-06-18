@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { APP_TITLE } from '../constants';
 import { EditIcon } from './icons';
 
 const Header: React.FC = () => {
   return (
-    <header className="py-6 px-4 sm:px-6 lg:px-8 bg-slate-900/80 backdrop-blur-md shadow-lg">
+    <header className="py-6 px-4 sm:px-6 lg:px-8 bg-slate-900 shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-center">
         <EditIcon className="h-10 w-10 text-sky-400 mr-4" />
         <h1 className="text-4xl font-extrabold tracking-tight">
